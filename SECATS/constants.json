@@ -180,6 +180,6 @@
     "Content-Type": "application/x-www-form-urlencoded"
   }, 
   "PROXY_POOL": [
-"用户名:密码@主机:端口"
+"Username: Password@Host: Port"
   ]
 }
