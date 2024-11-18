@@ -17,6 +17,7 @@ This tool integrates the Token Bucket Algorithm, Proxy Pool Management, HTTP Ses
    - [Threat Sample Generation and Parsing](#Threat-Sample-Generation-and-Parsing)
    - [Network Request Sending and Proxy Usage](#Network-Request-Sending-and-Proxy-Usage)
 4. [Main Program Flow](#Main-Program-Flow)
+5. [Usage Flow](#Usage-Flow)
 ---
 
 ## Tool Features
@@ -159,7 +160,7 @@ The main program provides an interactive interface and executes threat testing r
 > **Interrupt Protection**：Captures "Ctrl+C" interruption signal to safely close all threads and clear queues, preventing unprocessed requests from being overlooked.
 ---
 
-## Usage Flow
+## Usage-Flow
 Directory structure:
 ```mermaid
 graph LR
