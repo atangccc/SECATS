@@ -2,8 +2,6 @@
 
 > **Disclaimer**：The use of this tool is limited to legal purposes only. All actions related to the use of this tool must comply with the laws and regulations of the country or region where it is being used. Any illegal or malicious use is not related to the developers, and users should bear legal responsibility on their own.
 
-This tool integrates the Token Bucket Algorithm, Proxy Pool Management, HTTP Session Management, and Network Testing functions, suitable for network request rate limiting, proxy pool management, and monitoring.
-
 ---
 
 ## Table of Contents
