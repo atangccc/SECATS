@@ -1,25 +1,25 @@
-# SECATS-威胁样本测试工具
+# SECATS - Threat Sample Testing Tool
 
-> **免责声明**：本工具的使用仅限于合法用途，所有与本工具相关的使用行为需符合所在国家或地区的法律法规。任何非法或恶意使用行为均与开发者无关，用户应自行承担法律责任。
+> **Disclaimer**：The use of this tool is limited to legal purposes only. All actions related to the use of this tool must comply with the laws and regulations of the country or region where it is being used. Any illegal or malicious use is not related to the developers, and users should bear legal responsibility on their own.
 
-本工具集成了令牌桶算法、代理池管理、HTTP会话管理和网络测试功能，适用于网络请求限速、代理池管理和监控。
+This tool integrates the Token Bucket Algorithm, Proxy Pool Management, HTTP Session Management, and Network Testing functions, suitable for network request rate limiting, proxy pool management, and monitoring.
 
 ---
 
-## 目录
+## Table of Contents
 
-1. [工具功能和亮点](#工具功能和亮点)
-2. [应用场景](#应用场景)
-3. [模块详解](#模块详解)
-   - [令牌桶算法和速率限制器](#令牌桶算法和速率限制器)
-   - [代理池管理器](#代理池管理器)
-   - [HTTP 会话管理](#http-会话管理)
-   - [威胁样本生成与解析](#威胁样本生成与解析)
-   - [网络请求发送与代理使用](#网络请求发送与代理使用)
-4. [主程序流程](#主程序流程)
+1. [Tool Features and Highlights](#Tool-Features-and-Highlights)
+2. [Application Scenarios](#Application-Scenarios)
+3. [Module Explanation](#Module-Explanation)
+   - [Token Bucket Algorithm and Rate Limiter](#Token-Bucket-Algorithm-and-Rate-Limiter)
+   - [Proxy Pool Manager](#Proxy-Pool-Manager)
+   - [HTTP Session Management](#HTTP-Session-Management)
+   - [Threat Sample Generation and Parsing](#Threat-Sample-Generation-and-Parsing)
+   - [Network Request Sending and Proxy Usage](#Network-Request-Sending-and-Proxy-Usage)
+4. [Main Program Flow](#Main-Program-Flow)
 ---
 
-## 工具特性
+## Tool Features
 
 ```auto
 root@xxxxxxxxxxx:~# python3 SeCats.py
@@ -31,86 +31,87 @@ root@xxxxxxxxxxx:~# python3 SeCats.py
 ███████║███████╗╚██████╔╝██║  ██║   ██║   ███████╗
 ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝ By atangccc-Setoi
 
-2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 配置文件校验结果：
-2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 路径验证：通过
-2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 格式验证：通过
-2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 所需键验证：通过 (缺失键：无)
-SECATS-安全测试评估工具🚀
-请输入生成的威胁样本数量: 100
-正在生成威胁样本🚀 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-生成了 100 个威胁样本
-是否保存威胁样本到 Parquet 文件？(y-是/n-否): y
-保存了分块数据到文件：2024-11-15/web_attack_samples_part1.parquet, 行范围 0 到 100
-请输入目标网站地址（域名或IP地址）: www.xxx.com
-目标域名或IP地址 https://www.xxx.com 有效
-是否使用代理池？(y-是/n-否): y
-正在校验代理池中的代理🚀 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
-有效代理数量: 40
-请选择线程类型🚀：
-1. 推荐🚀-50
-2. 快速🚀-100
-3. 极速🚀-200
-4. 自定义🚀
-请输入线程选项（1-4）: 1
-请输入每秒请求数（1-1000）: 10
-正在执行任务 🚀   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 100/100 48.656412284006365
-执行完毕🚀！成功次数: 85, 失败次数: 15
+2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 Configuration file check result:
+2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 Path validation: Passed
+2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 Format validation: Passed
+2024-11-15 07:53:12,829 INFO     2024-11-15 07:53:12 Required keys validation: Passed (Missing keys: None)
+SECATS-Security Testing Evaluation Tool🚀
+Enter the number of threat samples to generate: 100
+Generating threat samples 🚀 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Generated 100 threat samples
+Save the threat samples to a Parquet file? (y-yes/n-no): y
+Saved chunked data to file: 2024-11-15/web_attack_samples_part1.parquet, row range 0 to 100
+Enter the target website address (domain or IP address): www.xxx.com
+The target domain or IP address https://www.xxx.com is valid
+Use proxy pool? (y-yes/n-no): y
+Validating proxies in the proxy pool 🚀 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Number of valid proxies: 40
+Select thread type 🚀:
+1. Recommended 🚀-50
+2. Fast 🚀-100
+3. Ultra Fast 🚀-200
+4. Custom 🚀
+Enter thread option (1-4): 1
+Enter requests per second (1-1000): 10
+Executing task 🚀 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 100/100 48.656412284006365
+Execution completed 🚀! Success: 85, Failures: 15
 ```
-本工具具备以下特性，能够更高效、安全、自动化地进行网络请求测试与限速控制：
 
-- **令牌桶算法**：基于经典的令牌桶算法实现请求流量控制，支持高并发环境下的稳定限速。
-- **代理池管理**：管理多重代理池并对代理进行健康检测和评分维护，确保代理池内代理的高可用性。
-- **HTTP 会话复用**：借助`requests.Session()`实现连接的复用，降低连接开销，提高并发请求的性能。
-- **威胁请求样本生成**：自动生成不同 HTTP 方法的请求样本，用于压力测试或网络安全相关的合规测试。
-- **多线程和限速控制**：提供灵活的多线程和请求速率限制设置，适用于各种请求量需求。
-- **可配置的用户输入接口**：允许用户设定威胁请求数量、目标网站地址、是否使用代理池等，简单易用。
-- **操作日志与结果记录**：在测试过程中自动记录成功和失败的请求，便于后续数据分析。
+This tool has the following features that make it more efficient, secure, and automated for network request testing and rate limiting control:
+
+- **Token Bucket Algorithm**：Implements request flow control based on the classic Token Bucket Algorithm, supporting stable rate limiting in high concurrency environments.
+- **Proxy Pool Management**：Manages multiple proxy pools, conducts health checks, and maintains scoring to ensure high availability of proxies in the pool.
+- **HTTP Session Reuse**：Uses requests.Session() to reuse connections, reduce connection overhead, and improve the performance of concurrent requests.
+- **Threat Request Sample Generation**：Automatically generates HTTP request samples of various methods for stress testing or network security compliance testing.
+- **Multi-threading and Rate Limiting**：Provides flexible multi-threading and request rate limit settings, suitable for various request volume needs.
+- **Configurable User Input Interface**：Allows users to set the number of threat requests, target website address, whether to use a proxy pool, etc., for easy use.
+- **Operation Logs and Result Recording**：Automatically records successful and failed requests during testing for subsequent data analysis.
 
 ---
 
-## 应用场景
+## Application Scenarios
 
-该工具适用于以下场景：
+This tool is applicable for the following scenarios:
 
-1. **防火墙性能测试**
-2. **安全威胁样本生成**
-3. **压力测试和负载测试**
-4. **自动化安全测试**
+1.Firewall Performance Testing
+2.Security Threat Sample Generation
+3.Stress and Load Testing
+4.Automated Security Testing
 
-## 模块详解
+## Module Explanation
 
-### 令牌桶算法和速率限制器
+### Token Bucket Algorithm and Rate Limiter
 
-通过`TokenBucket`和`RateLimiter`类实现的流量控制模块，用于精准控制请求速率。
+This traffic control module is implemented through TokenBucket and RateLimiter classes for precise request rate control.
 
 #### TokenBucket
 
-`TokenBucket`类实现了基础的令牌桶算法。通过设定容量和填充速率来控制请求流量，每秒自动填充固定数量的令牌供请求消耗，确保请求频率符合预设标准。
+The TokenBucket class implements the basic Token Bucket Algorithm. By setting the capacity and refill rate, it controls request flow, automatically filling a fixed number of tokens per second to ensure that the request rate complies with preset standards.
 
-**主要属性和方法**：
+Main attributes and methods:
 
-- **`__init__`**：初始化令牌桶的容量和填充速率，适配不同的网络请求需求。
-- **`refill`**：按预设速率填充令牌，确保令牌数量在高并发请求下得到有效补充。
-- **`take`**：尝试从桶中取出令牌，若取出成功则允许请求执行，否则限制请求。
+- **`__init__`**：Initializes the capacity and refill rate of the token bucket to adapt to different network request needs.
+- **`refill`**：Refill tokens at the preset rate to ensure effective replenishment under high concurrency.
+- **`take`**：Attempts to take tokens from the bucket. If successful, the request is allowed; otherwise, the request is limited.
 
 #### RateLimiter
 
-`RateLimiter`类提供了一个简单的速率控制方法，可在低负载情况下替代`TokenBucket`进行限速控制，支持简单场景下的限速需求。
+The`RateLimiter`class provides a simple rate control method, serving as a replacement for the `TokenBucket` in low-load scenarios to meet basic rate limiting needs.
 
 ---
 
-### 代理池管理器
+### Proxy Pool Manager
 
-`ProxyPoolManager`用于管理、更新和监控代理池中代理的可用状态和评分。可设置代理的初始评分、最大分值、最小分值等参数，保障高质量代理的自动选择。
+The`ProxyPoolManager`is responsible for managing, updating, and monitoring the availability and scoring of proxies in the pool. It ensures automatic selection of high-quality proxies by adjusting proxy ratings based on success and failure rates.
 
-**主要功能**：
+Main functions:
 
-- **`__init__`**：初始化代理池和代理评分系统，并加载预设代理。
-- **`update_proxy_score`**：根据代理的请求成功率和失败率动态调整评分，剔除低评分的代理。
-- **`get_best_proxy`**：根据评分获取高质量代理，确保使用最佳代理池。
-- **`remove_proxy`**：自动清除低于设定分值的代理，保持代理池的高质量和稳定性。
+- **`__init__`**： Initializes the proxy pool and proxy scoring system, loading preset proxies.
+- **`update_proxy_score`**：Dynamically adjusts proxy scores based on success and failure rates, removing low-rated proxies.
+- **`get_best_proxy`**：Selects the highest-quality proxy based on its rating.
+- **`remove_proxy`**：Automatically removes proxies with ratings below the set threshold to maintain pool quality and stability.
 
-#### 代理池健康检测
+#### Proxy Health Check
 
 通过 `check_proxy_health` 函数验证代理池中的代理可用性，确保请求的成功率，筛选和记录有效代理。
 
@@ -118,44 +119,66 @@ SECATS-安全测试评估工具🚀
 
 ### HTTP 会话管理
 
-使用`get_shared_session`函数管理 HTTP 会话，基于 `requests.Session()`复用 TCP 连接，减少连接开销，提高请求性能。
+The `get_shared_session`function manages HTTP sessions, reusing TCP connections with requests.Session() to reduce overhead and improve request performance.
 
-- **会话池复用**：避免频繁建立连接，减少资源浪费，尤其在高并发场景下效果显著。
-- **连接重试策略**：通过会话设置实现自动重试，提升请求的成功率和可靠性。
-
----
-
-### 威胁样本生成与解析
-
-**`generate_web_attack_samples`**和**`parse_sample`**函数用于模拟生成多种类型的 HTTP 请求样本，支持 GET、POST、PUT 等多种 HTTP 方法，可应用于网络威胁测试和模拟攻击流量。
-
-- **威胁请求生成**：根据用户设定的样本数量生成不同方法的请求。
-- **样本解析**：解析生成的请求样本，并提取 HTTP 请求的关键元素（方法、路径、头部、内容）供调用。
-
-> 注意：生成的威胁请求样本仅限合法合规测试，切勿非法使用。
+- **Session Pool Reuse**： Avoids frequent connection establishment, reducing resource waste, especially beneficial in high concurrency scenarios.
+- **Connection Retry Policy**：Implements automatic retries through session settings to increase success rates and reliability.
 
 ---
 
-### 网络请求发送与代理使用
+### Threat Sample Generation and Parsing
 
-**`send_request_with_proxy`**：该方法负责发送 HTTP 请求并支持代理池调用，带有重试机制、超时控制和速率控制功能。
+The **`generate_web_attack_samples`** and **`parse_sample`** functions simulate the generation of various types of HTTP request samples, supporting methods such as GET, POST, and PUT, useful for network threat testing and simulated attack traffic.
 
-- **速率限制**：调用令牌桶控制请求频率，确保符合设定的请求流量。
-- **代理轮换**：通过代理池动态选择最佳代理，减少被封禁的风险。
-- **重试与超时设置**：若请求失败或超时，将重新尝试，确保请求发送的稳定性。
+- **Threat Request Generation**： Generates requests based on the number of samples specified by the user.
+- **Sample Parsing**：Parses generated request samples and extracts key elements of the HTTP request (method, path, headers, content).
+
+> Note: The generated threat request samples are intended for legal and compliant testing only. Please refrain from using them for illegal purposes.
+
+---
+
+### Network Request Sending and Proxy Usage
+
+**`send_request_with_proxy`**：This method is responsible for sending HTTP requests with proxy support, featuring retry mechanisms, timeout controls, and rate limiting functions.
+
+- **Rate Limiting**：The Token Bucket controls the request frequency to ensure it aligns with the preset request rate.
+- **Proxy Rotation**：Dynamically selects the best proxy from the pool to reduce the risk of being blocked.
+- **Retry and Timeout Settings**：If a request fails or times out, it will be retried to ensure stable request sending.
 
 ---
 
-## 主程序流程
+## Main Program Flow
 
-主程序提供用户交互接口，并按用户输入的配置项执行威胁测试请求。流程大致如下：
+The main program provides an interactive interface and executes threat testing requests based on user configuration. The process is as follows:
 
-1. **输入威胁样本数量**：生成相应数量的威胁测试请求样本。
-2. **验证目标 URL**：检查目标 URL 是否符合格式要求。
-3. **选择是否使用代理池**：如启用代理池，则进行代理池健康检查，筛选出高质量代理。
-4. **设置线程数和每秒请求数**：根据用户输入配置线程池和令牌桶。
-5. **执行请求**：基于多线程池按设定速率执行请求。成功或失败的请求分别记录于不同的队列，便于后续统计分析。
-
-> **中断保护**：捕获 “Ctrl+C” 中断信号，确保安全关闭所有线程和清空队列，防止未处理请求遗漏。
-
+1. **Enter Threat Sample Quantity**：Generate the specified number of threat test requests.
+2. **Verify Target URL**：Check if the target URL is valid.
+3. **Choose Proxy Pool Usage**： If the proxy pool is enabled, conduct a health check to select valid proxies.
+4. **Set Thread Count and Request Rate**：Configure the thread pool and token bucket as per user input.
+5. **Execute Requests**：Executes requests based on a multi-threaded pool at a preset rate. Successful or failed requests are logged in separate queues for later analysis.
+> **Interrupt Protection**：Captures "Ctrl+C" interruption signal to safely close all threads and clear queues, preventing unprocessed requests from being overlooked.
 ---
+
+## Usage Flow
+Directory structure:
+```mermaid
+graph LR
+    C{SECATS}
+    C --> D[samples]
+    C --> E[constants.json]
+    C --> F[SeCats.sh]
+```
+### Download Image
+
+```
+docker pull cnhyk123/secats:latest
+```
+### Add Proxy
+-详情请查看constants.json常量文件
+### Run Program
+```
+chmod -x ./SeCats.sh
+```
+```
+./SeCats.sh
+```
