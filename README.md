@@ -174,7 +174,7 @@ graph LR
 docker pull cnhyk123/secats:latest
 ```
 ### Add Proxy
--详情请查看constants.json常量文件
+- Details can be found in the constants.json file
 ### Run Program
 ```
 chmod -x ./SeCats.sh
