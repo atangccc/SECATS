@@ -116,7 +116,7 @@ Main functions:
 
 ---
 
-### HTTP 会话管理
+### HTTP session management
 
 The `get_shared_session`function manages HTTP sessions, reusing TCP connections with requests.Session() to reduce overhead and improve request performance.
 
